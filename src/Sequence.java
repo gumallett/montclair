@@ -120,13 +120,16 @@ class Sequence
       It should use the dynamic programming algorithm for this
       that we discussed in class		
 	*/
-	public Sequence getLongestIncreasingSubsequence()
-	{
-	  TableEntry[][] bestSequences = new TableEntry[seqLength][seqLength];
-	    /* A table to maintain the best final values in the longest
+	public Sequence getLongestIncreasingSubsequence() {
+      //TableEntry[][] bestSequences = new TableEntry[seqLength][seqLength];
+       /* A table to maintain the best final values in the longest
 		     increasing subsequences from seq(i) as i goes from 0 to 
 			  seqLength-1.
 		*/
+
+      if(this.getLength() == 0) {
+         return new Sequence(0);
+      }
 
       SortedSet<TableEntry> lis = new TreeSet<TableEntry>();
       int[] P = new int[seqLength]; // will store indexes of parent elements so that we can recreate the LIS later
@@ -145,7 +148,7 @@ class Sequence
             SortedSet<TableEntry> headSet = lis.headSet(entry);
 
             if(headSet.isEmpty()) {
-               // No elements before this one, so this must start a (possible) LIS
+               // No elements before this one, so this must start a (candidate) LIS
                P[i] = -1;
             }
             else {
