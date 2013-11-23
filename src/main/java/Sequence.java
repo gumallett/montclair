@@ -201,4 +201,17 @@ class Sequence
 
       return lis;
    }
+
+   @Override
+   public String toString() {
+      StringBuilder builder = new StringBuilder();
+
+      for(int i = 0; i < this.getLength(); i++) {
+         builder.append(this.getValueAt(i));
+         builder.append(',');
+      }
+
+      builder.deleteCharAt(builder.length() - 1);
+      return builder.toString();
+   }
 } 
