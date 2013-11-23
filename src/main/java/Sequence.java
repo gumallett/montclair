@@ -54,6 +54,15 @@ class Sequence
          this.index = index;
       }
 
+      @Override
+      public boolean equals(Object o) {
+         if(o instanceof TableEntry) {
+            return this.value.equals(((TableEntry) o).getValue());
+         }
+
+         return false;
+      }
+
       /**
        * {@inheritDoc}
        */
@@ -131,48 +140,37 @@ class Sequence
          return new Sequence(0);
       }
 
-      SortedSet<TableEntry> lis = new TreeSet<TableEntry>();
-      int[] P = new int[seqLength]; // will store indexes of parent elements so that we can recreate the LIS later
+      List<TableEntry> lis = new ArrayList<TableEntry>(seqLength);
+      int[] P = new int[seqLength]; // will store indexes of parent elements in the LIS so that we can recreate the LIS later
 
       for(int i = 0; i < seqLength; i++) {
-         int currentSeqValue = this.getValueAt(i);
-         TableEntry entry = new TableEntry(currentSeqValue, i);
-         TableEntry max = null;
+         final int currentSeqValue = this.getValueAt(i);
+         final TableEntry entry = new TableEntry(currentSeqValue, i);
+         final int maxIdx = lis.size() - 1;
 
-         if(lis.size() > 0) {
-            max = lis.last();
-         }
+         if(!lis.isEmpty() && currentSeqValue <= lis.get(maxIdx).getValue()) {
+            int insertionPoint = findInsertionPoint(lis, entry);
 
-         if(max != null && currentSeqValue <= max.getValue()) {
-            TableEntry toReplace = lis.tailSet(entry).first();
-            SortedSet<TableEntry> headSet = lis.headSet(entry);
-
-            if(headSet.isEmpty()) {
+            if(insertionPoint == 0) {
                // No elements before this one, so this must start a (candidate) LIS
                P[i] = -1;
             }
             else {
                // Store the index of the element < this one
-               P[i] = headSet.last().getIndex();
+               P[i] = lis.get(insertionPoint - 1).getIndex();
             }
 
-            lis.remove(toReplace);
+            lis.set(insertionPoint, entry);
          }
          else {
             // This number is the ending number in a LIS of this sequence.
             // Track its parent.
-            if(lis.isEmpty()) {
-               P[i] = -1;
-            }
-            else {
-               P[i] = lis.last().getIndex();
-            }
+            P[i] = lis.isEmpty() ? -1 : lis.get(maxIdx).getIndex();
+            lis.add(entry);
          }
-
-         lis.add(entry);
       }
 
-      return buildLIS(P, lis.last().getIndex());
+      return buildLIS(P, lis.get(lis.size() - 1).getIndex());
    }
 
    /**
@@ -200,6 +198,22 @@ class Sequence
       }
 
       return lis;
+   }
+
+   /**
+    * Returns the index of the smallest element >= entry in list
+    * @param list List to check
+    * @param entry The key
+    */
+   private static int findInsertionPoint(List<TableEntry> list, TableEntry entry) {
+      int insertionPoint = Collections.binarySearch(list, entry);
+
+      if(insertionPoint < 0) {
+         insertionPoint++;
+         insertionPoint *= -1;
+      }
+
+      return insertionPoint;
    }
 
    @Override
