@@ -167,18 +167,27 @@ class Sequence
          lis.add(entry);
       }
 
-      return buildLIS(this, new Sequence(seqLength), P, lis.last().getIndex());
+      return buildLIS(P, lis.last().getIndex());
    }
 
-   private static Sequence buildLIS(Sequence originalSeq, Sequence lis, int[] P, int idx) {
-      if(P[idx] == -1) {
-         lis.append(originalSeq.getValueAt(idx));
-         return lis;
+   private Sequence buildLIS(int[] P, int idx) {
+      Sequence lis = new Sequence(this.getLength());
+      Deque<Integer> stack = new ArrayDeque<Integer>(this.getLength());
+
+      while(true) {
+         stack.addFirst(this.getValueAt(idx));
+
+         if(P[idx] == -1) {
+            break;
+         }
+
+         idx = P[idx];
       }
 
-      lis = buildLIS(originalSeq, lis, P, P[idx]);
-      lis.append(originalSeq.getValueAt(idx));
+      for(Integer val : stack) {
+         lis.append(val);
+      }
+
       return lis;
    }
-
 } 
