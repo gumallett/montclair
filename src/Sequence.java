@@ -156,6 +156,8 @@ class Sequence
             lis.remove(toReplace);
          }
          else {
+            // This number is the ending number in a LIS of this sequence.
+            // Track its parent.
             if(lis.isEmpty()) {
                P[i] = -1;
             }
@@ -170,6 +172,12 @@ class Sequence
       return buildLIS(P, lis.last().getIndex());
    }
 
+   /**
+    * Builds the lis from the P array.
+    * @param P array of parent indicies
+    * @param idx The starting index
+    * @return A LIS of this sequence
+    */
    private Sequence buildLIS(int[] P, int idx) {
       Sequence lis = new Sequence(this.getLength());
       Deque<Integer> stack = new ArrayDeque<Integer>(this.getLength());
