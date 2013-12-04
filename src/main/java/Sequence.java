@@ -183,13 +183,8 @@ class Sequence
       Sequence lis = new Sequence(this.getLength());
       Deque<Integer> stack = new ArrayDeque<Integer>(this.getLength());
 
-      while(true) {
+      while(idx >= 0) {
          stack.addFirst(this.getValueAt(idx));
-
-         if(P[idx] == -1) {
-            break;
-         }
-
          idx = P[idx];
       }
 
