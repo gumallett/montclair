@@ -3,32 +3,31 @@
 <title>Lab 2.1</title>
 
 <style>
-	th td {
+	#numbers tbody {
+		text-align: left;
+	}
+
+	#numbers thead th td {
+		text-align: left;
 		font-weight: bold;
 	}
 </style>
 
 <script>
 	function fillInNumbers(numbers) {
-		var arr = numbers.split(/\s/);
-		var elems = document.getElementsByClassName("numbers");
+		var arr = numbers.split(/\s*/);
 		
-		for(var i in elems) {
-			elems[i].innerHTML = arr[i];
-		}
+		var numElems = document.getElementsByClassName("numbers");
+		var sqElems = document.getElementsByClassName("squares");
+		var cuElems = document.getElementsByClassName("cubes");
 		
-		elems = document.getElementsByClassName("squares");
-		
-		for(var i in elems) {
-			var num = arr[i];
-			elems[i].innerHTML = num*num;
-		}
-		
-		elems = document.getElementsByClassName("cubes");
-		
-		for(var i in elems) {
-			var num = arr[i];
-			elems[i].innerHTML = num*num*num;
+		for(var i in arr) {
+			var num = parseInt(arr[i]);
+			if(!isNaN(num)) {
+				numElems[i].innerHTML = num;
+				sqElems[i].innerHTML = num*num;
+				cuElems[i].innerHTML = num*num*num;
+			}
 		}
 	}
 </script>
@@ -37,11 +36,11 @@
 
 	<table id="numbers">
 		<thead>
-			<th>
-				<td>Number</td>
-				<td>Square</td>
-				<td>Cube</td>
-			</th>
+			<tr>
+				<th>Number</th>
+				<th>Square</th>
+				<th>Cube</th>
+			</tr>
 		</thead>
 		<tbody>
 			<tr>
