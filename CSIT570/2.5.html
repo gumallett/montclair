@@ -1,0 +1,22 @@
+<html>
+<head>
+<title> Start and stop a clock </title>
+</head>
+<body>
+<input type="text" size= "60" id="theclock" />
+<script type="text/javascript">
+	var setIntervalID = window.setInterval("setClock()",1000);
+	
+	function setClock()
+	{
+		var now = new Date();
+		document.getElementById("theclock").value=now.toLocaleTimeString();
+	}
+	function stopClock()
+	{
+		clearIntervalID=window.clearInterval(setIntervalID);
+	}
+</script>
+<button onclick="stopClock()">Stop</button>
+</body>
+</html>
