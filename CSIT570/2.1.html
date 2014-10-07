@@ -2,41 +2,70 @@
 <head>
 <title>Lab 2.1</title>
 
+<style>
+	th td {
+		font-weight: bold;
+	}
+</style>
+
 <script>
-	function fillInNumbers() {
+	function fillInNumbers(numbers) {
+		var arr = numbers.split(/\s/);
+		var elems = document.getElementsByClassName("numbers");
 		
+		for(var i in elems) {
+			elems[i].innerHTML = arr[i];
+		}
+		
+		elems = document.getElementsByClassName("squares");
+		
+		for(var i in elems) {
+			var num = arr[i];
+			elems[i].innerHTML = num*num;
+		}
+		
+		elems = document.getElementsByClassName("cubes");
+		
+		for(var i in elems) {
+			var num = arr[i];
+			elems[i].innerHTML = num*num*num;
+		}
 	}
 </script>
 </head>
 <body>
 
 	<table id="numbers">
-		<th>
-			<td>Number</td>
-			<td>Square</td>
-			<td>Cube</td>
-		</th>
-		<tr>
-			<td class="numbers"></td>
-			<td class="squares"></td>
-			<td class="cubes"></td>
-		</tr>
-		<tr>
-			<td class="numbers"></td>
-			<td class="squares"></td>
-			<td class="cubes"></td>
-		</tr>
-		<tr>
-			<td class="numbers"></td>
-			<td class="squares"></td>
-			<td class="cubes"></td>
-		</tr>
+		<thead>
+			<th>
+				<td>Number</td>
+				<td>Square</td>
+				<td>Cube</td>
+			</th>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="numbers"></td>
+				<td class="squares"></td>
+				<td class="cubes"></td>
+			</tr>
+			<tr>
+				<td class="numbers"></td>
+				<td class="squares"></td>
+				<td class="cubes"></td>
+			</tr>
+			<tr>
+				<td class="numbers"></td>
+				<td class="squares"></td>
+				<td class="cubes"></td>
+			</tr>
+		</tbody>
 	</table>
 
 	<script>
-		var answer = prompt("Please enter 3 numbers seperated by space.", "Enter Numbers");
+		var answer = prompt("Please enter 3 numbers seperated by space.", "1 2 3");
 		
-		alert(answer);
+		fillInNumbers(answer);
 	</script>
 </body>
 </html>
