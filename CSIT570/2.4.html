@@ -1,0 +1,38 @@
+<?xml version = "1.0"?>
+<!DOCTYPE html PUBLIC "-//w3c//DTD XHTML 1.1//EN""http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!--get_total_primary.html-->
+<html xmlns = "http://www.w3.org/1999/xhtml">
+<head> <title> Purchase Orange </title>
+<!--Script for the event handlers-->
+<script type = "text/javascript">
+// The event handler function to compute the cost
+function computeCost() {
+    var orange = document.getElementById("orange").value;
+    var watermelon = document.getElementById("watermelon").value;
+    var pineapple = document.getElementById("pineapple").value;
+    // Compute the cost
+    var val = orange * 1.99;
+    val += watermelon * 4.99;
+    val += pineapple * 4.69;
+    document.getElementById("cost").value = val.toFixed(2);
+} //* end of computeCost
+</script>
+
+</head>
+<body>
+<h1>
+To illustrate the use of getElementById and how to use function to handle button
+onclick event
+</h1>
+<form>
+    Orange $1.99/lb <input type = "text" id = "orange" size ="3" /><br/>
+    Watermelon $4.99/ea <input type = "text" id = "watermelon" size ="3" /><br/>
+    Pineapple $4.69/ea <input type = "text" id = "pineapple" size ="3" /><br/>
+<br />
+Total Cost is <input type = "text" id = "cost" size ="5" />
+<br />
+<input type = "button" value = "Total Cost" onclick="computeCost();"/><br/>
+<input type="submit" value="Order Now"/><input type="reset" value="clear"/>
+</form>
+</body>
+</html>
