@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>lab 2.3</title>
+
+    <style>
+        #theTable thead td {
+            font-weight: bold;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+
+    <script>
+        function createCol(parent, text, elem) {
+            if(!elem) {
+                elem = "td";
+            }
+
+            var col = document.createElement("td");
+            parent.appendChild(col);
+            col.appendChild(document.createTextNode(text));
+            return col;
+        }
+
+        function addRow(parent, data, elem) {
+            var row = document.createElement("tr");
+            parent.appendChild(row);
+
+            for(var i in data) {
+                createCol(row, data[i], elem);
+            }
+        }
+
+        function addHeader(parent, data) {
+            addRow(parent, data, "th");
+        }
+    </script>
+</head>
+<body>
+    <table id="theTable">
+
+    </table>
+
+<script>
+    var table = document.getElementById("theTable");
+    var thead = document.createElement("thead");
+    var tbody = document.createElement("tbody");
+    var row = document.createElement("tr");
+    table.appendChild(thead);
+    table.appendChild(tbody);
+    for(var i=0; i<7; i++) {
+        if(i==0) {
+            addHeader(thead, ["N", "10*N", "100*N", "1000*N"]);
+        }
+        else {
+            addRow(tbody, [i, 10*i, 100*i, 1000*i]);
+        }
+    }
+</script>
+</body>
+</html>
