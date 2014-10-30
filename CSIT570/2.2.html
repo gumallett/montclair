@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>lab 2.2</title>
+</head>
+<body>
+    Northern New Jersey Profit
+    <table id="theTable" border="0">
+        <tr>
+            <td></td>
+            <td>April</td>
+            <td>May</td>
+            <td>June</td>
+        </tr>
+        <tr>
+            <td>Montclair</td>
+            <td>100</td>
+            <td>80</td>
+            <td>90</td>
+        </tr>
+        <tr>
+            <td>Clifton</td>
+            <td>79</td>
+            <td>80</td>
+            <td>90</td>
+        </tr>
+        <tr>
+            <td>Newark</td>
+            <td>100</td>
+            <td>95</td>
+            <td>91</td>
+        </tr>
+    </table>
+
+<h2>Press Reload or Refresh</h2>
+
+<script>
+    var response = prompt("Please select a size for table border: \n3 (3 pixel border)\n5 (5 pixel border)\n7 (7 pixel border)\n9 (9 pixel border)")
+    response = parseInt(response);
+
+    if(!isNaN(response)) {
+        var table = document.getElementById("theTable");
+        table.setAttribute("border", response);
+    }
+
+</script>
+</body>
+</html>
